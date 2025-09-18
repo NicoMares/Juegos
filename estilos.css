@@ -11,14 +11,27 @@
     --accent-glow: ea54e3;
     --text: #ffffff;
     }
-    
+
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+    /* Estilos globales 
     body {
     background-color: var(--dark-bg);
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
     }
-    
+    */
     /* Barra  superior Para botones */
     .cabecera {
     position: fixed;
@@ -213,15 +226,14 @@
     .vehiculos-caja {
         border-radius: 10px;
         padding: 10px;
-        width: 150px;
-        height: 200px;
+        width: 230px;      /* Aumenta el ancho */
+        height: 260px;     /* Aumenta el alto */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-       
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background: var(--dark-bg); /* Fondo oscuro */
+        background: var(--dark-bg);
     }
     
     
@@ -232,8 +244,8 @@
     
     /* cambia el tamaño de las imagenes de las instituciones */
     .vehiculos-caja img {
-        width: 120px;
-        height: 120px;
+        width: 180px;      /* Aumenta el tamaño de la imagen */
+        height: 140px;
         object-fit: contain;
         margin-bottom: 10px;
         
@@ -483,4 +495,122 @@
         font-size: 1.5rem;
         padding-left: 2rem;
     }
+
+
+
+/* Estilos para las tarjetas de marcas en PC y móvil */
+#marcas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+    max-width: 1100px;
+}
+
+.marca-card {
+    min-width: 170px;
+    min-height: 120px;
+    font-size: 1.2rem;
+    padding: 18px 0 12px 0;
+    background: linear-gradient(120deg, #222 60%, #b40c28 100%);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(234, 84, 227, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    letter-spacing: 2px;
+    margin: 8px 0;
+    border: 2px solid #fff1;
+}
+
+.marca-card:hover {
+    transform: scale(1.07);
+    background: linear-gradient(120deg, #b40c28 40%, #222 100%);
+    box-shadow: 0 16px 48px rgba(234, 84, 227, 0.28);
+}
+
+.marca-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 8px #0008);
+    background: transparent;
+    border-radius: 8px;
+}
+
+.marca-nombre {
+    text-shadow: 0 2px 8px #0008;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+}       
     }
+   
+/* Estilos para las tarjetas de marcas en PC */
+#marcas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 5 columnas fijas */
+    gap: 32px;/* ancho entre marcas */
+    justify-items: center;
+    align-items: stretch;
+    margin: 0 auto 30px auto;
+    max-width: 1100px; /* Menor ancho para que no se pierdan */
+    padding: 30px 0; /* altura*/
+    box-sizing: border-box;
+}
+
+.marca-card {
+    width: 220px;
+    height: 170px;
+    font-size: 1.2rem;
+    padding: 18px 0 12px 0;
+    background: linear-gradient(120deg, #222 60%, #b40c28 100%);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(234, 84, 227, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    letter-spacing: 2px;
+    border: 2px solid #fff1;
+}
+
+.marca-card:hover {
+    transform: scale(1.07);
+    background: linear-gradient(120deg, #b40c28 40%, #222 100%);
+    box-shadow: 0 16px 48px rgba(234, 84, 227, 0.28);
+}
+
+.marca-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 8px #0008);
+    background: transparent;
+    border-radius: 8px;
+}
+
+.marca-nombre {
+    text-shadow: 0 2px 8px #0008;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    #marcas {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 auto 30px auto;
+        max-width: 100%;
+    }
+}

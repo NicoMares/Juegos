@@ -7,8 +7,8 @@
     :root {
     --dark-bg: #0a0a0a;
     --darker-bg: #050505;
-    --accent: #ea54e3;
-    --accent-glow: ea54e3;
+    --accent: #b40c28;      /* Cambiado de rosa a rojo */
+    --accent-glow: #b40c28; /* Cambiado de rosa a rojo */
     --text: #ffffff;
     }
 
@@ -223,23 +223,27 @@ body {
         justify-items: center; /* Centra los elementos horizontalmente */
     }
     
-    .vehiculos-caja {
-        border-radius: 10px;
-        padding: 10px;
-        width: 230px;      /* Aumenta el ancho */
-        height: 260px;     /* Aumenta el alto */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background: var(--dark-bg);
-    }
+   .vehiculos-caja {
+    background: linear-gradient(120deg, #222 60%, #b40c28 100%);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
+    border: 2px solid #fff1;
+    /* Mantén los estilos previos */
+    padding: 10px;
+    width: 230px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
     
     
     .vehiculos-caja:hover {
         transform: scale(1.1);
-        box-shadow: 0 6px 10px rgba(207, 12, 191, 0.5);
+        box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
     }
     
     /* cambia el tamaño de las imagenes de las instituciones */
@@ -306,7 +310,7 @@ body {
 /* cambia el color de fondo al pasar el mouse */
 .tecnologias-caja:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 10px rgba(0, 188, 212, 0.5);
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
 }
 
 .tecnologias-caja img {
@@ -334,10 +338,10 @@ body {
 }
 
 .proyecto-item {
-    display: flex;
+     display: flex;
     flex-direction: row;
     gap: 20px;
-    background: var(--darker-bg);
+    background: var(--dark-bg); /* Cambiado para igualar el fondo de la página */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
@@ -386,7 +390,7 @@ body {
 /* Aplica el efecto hover a los elementos del proyecto */
 .proyecto-item:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 10px rgba(0, 188, 212, 0.5);
+    box-shadow:0 6px 10px rgba(112, 18, 18, 0.5);
 }
 
 
@@ -516,7 +520,7 @@ body {
     background: linear-gradient(120deg, #222 60%, #b40c28 100%);
     color: #fff;
     border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(234, 84, 227, 0.18);
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -531,7 +535,7 @@ body {
 .marca-card:hover {
     transform: scale(1.07);
     background: linear-gradient(120deg, #b40c28 40%, #222 100%);
-    box-shadow: 0 16px 48px rgba(234, 84, 227, 0.28);
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
 }
 
 .marca-logo {
@@ -573,7 +577,7 @@ body {
     background: linear-gradient(120deg, #222 60%, #b40c28 100%);
     color: #fff;
     border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(234, 84, 227, 0.18);
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -587,7 +591,7 @@ body {
 .marca-card:hover {
     transform: scale(1.07);
     background: linear-gradient(120deg, #b40c28 40%, #222 100%);
-    box-shadow: 0 16px 48px rgba(234, 84, 227, 0.28);
+    box-shadow:0 6px 10px rgba(112, 18, 18, 0.5);
 }
 
 .marca-logo {
@@ -613,4 +617,27 @@ body {
         margin: 0 auto 30px auto;
         max-width: 100%;
     }
+}
+
+/* Estilo para el botón "Volver a Marcas" */
+#volver-marcas {
+    background: linear-gradient(45deg, var(--accent), #b40c28);
+    color: #fff;
+    border: 2px solid #fff1;
+    border-radius: 12px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+#volver-marcas:hover {
+    background: linear-gradient(120deg, #b40c28 40%, #222 100%);
+    transform: scale(1.07);
+    box-shadow: 0 6px 10px rgba(112, 18, 18, 0.5);
 }

@@ -20,7 +20,7 @@ window.addEventListener('scroll', () => {
 const autosPorMarca = {
     'Audi': [
         {
-            logo: 'imagenes/Forza/logos/audi.svg',
+            logo: 'imagenes/Forza/logos/audi.png',
             autos: [
 
 
@@ -41,7 +41,7 @@ const autosPorMarca = {
 
     'Bugatti': [
         {
-            logo: 'imagenes/Forza/logos/bugatti.jpg',
+            logo: 'imagenes/Forza/logos/bugatti.png',
             autos: [
                 { nombre: 'Bugatti Divo', imagen: 'imagenes/Forza/superRuleta/Bugatti/Divo.png' }
     ]
@@ -50,9 +50,9 @@ const autosPorMarca = {
 
     'Chevrolet': [
         {
-            logo: 'imagenes/Forza/logos/chevrolet.svg',
+            logo: 'imagenes/Forza/logos/chevrolet.png',
             autos: [
-                { nombre: 'Chevrolet Charger R/T Forza Edition', imagen: 'imagenes/Forza/superRuleta/Chevrolet/Charger RT.PNG' },
+                
                 { nombre: 'Chevrolet Corvette Forza Edition', imagen: 'imagenes/Forza/superRuleta/Chevrolet/Corvette FE.png' }
     ]
      }
@@ -60,9 +60,9 @@ const autosPorMarca = {
 
     'Dodge': [
         {
-            logo: 'imagenes/Forza/logos/dodge.svg',
+            logo: 'imagenes/Forza/logos/dodge.png',
             autos: [
-
+                { nombre: 'Dodge Charger R/T Forza Edition', imagen: 'imagenes/Forza/superRuleta/Dodge/Charger FE.PNG' },
 
             ]
         }
@@ -90,7 +90,7 @@ const autosPorMarca = {
     ],
     'Jaguar': [
         {
-            logo: 'imagenes/Forza/logos/jaguar.svg',
+            logo: 'imagenes/Forza/logos/jaguar.png',
             autos: [
                 { nombre: 'Jaguar D-Type', imagen: 'imagenes/Forza/superRuleta/Jaguar/D-Type.png' }
             ]
@@ -98,7 +98,7 @@ const autosPorMarca = {
     ],
     'Koenigsegg': [
         {
-            logo: 'imagenes/Forza/logos/koenigsegg.svg',
+            logo: 'imagenes/Forza/logos/koenigsegg.png',
             autos: [
                 { nombre: 'Koenigsegg Agera RS', imagen: 'imagenes/Forza/superRuleta/koenigsegg/Agera RS.png' }
             ]
@@ -119,7 +119,7 @@ const autosPorMarca = {
     ],
     'Lola': [
         {
-            logo: 'imagenes/Forza/logos/lola.svg',
+            logo: 'imagenes/Forza/logos/lola.png',
             autos: [
                 { nombre: '1969 Lola #6 Penske Sunoco T70 MKIIIB', imagen: 'imagenes/Forza/superRuleta/Lola/Lola Carreras.png' }
             ]
@@ -153,7 +153,7 @@ const autosPorMarca = {
     ],
     'MG': [
         {
-            logo: 'imagenes/Forza/logos/mg.svg',
+            logo: 'imagenes/Forza/logos/mg.png',
             autos: [
                 { nombre: 'MG Metro 6R4', imagen: 'imagenes/Forza/superRuleta/MG/Metro 6R4.png' }
             ]
@@ -161,7 +161,7 @@ const autosPorMarca = {
     ],
     'Napier': [
         {
-            logo: 'imagenes/Forza/logos/napier.svg',
+            logo: 'imagenes/Forza/logos/napier.png',
             autos: [
                 { nombre: 'Napier Railton', imagen: 'imagenes/Forza/superRuleta/Napier/Railton.png' }
             ]
@@ -169,7 +169,7 @@ const autosPorMarca = {
     ],
     'Nissan': [
         {
-            logo: 'imagenes/Forza/logos/nissan.svg',
+            logo: 'imagenes/Forza/logos/nissan.png',
             autos: [
                 { nombre: 'Nissan Fairlady Z Forza Edition', imagen: 'imagenes/Forza/superRuleta/Nissan/Fairlady FE.png' }
             ]
@@ -177,7 +177,7 @@ const autosPorMarca = {
     ],
     'Pagani': [
         {
-            logo: 'imagenes/Forza/logos/pagani.svg',
+            logo: 'imagenes/Forza/logos/pagani.png',
             autos: [
                 { nombre: 'Pagani Huayra BC', imagen: 'imagenes/Forza/superRuleta/Pagani/Pagani Huayra BC.png' },
                 { nombre: 'Pagani Zonda Roadster', imagen: 'imagenes/Forza/superRuleta/Pagani/Pagani Zonda Roadster.png' }
@@ -186,7 +186,7 @@ const autosPorMarca = {
     ],
     'Peel': [
         {
-            logo: 'imagenes/Forza/logos/peel.svg',
+            logo: 'imagenes/Forza/logos/peel.png',
             autos: [
                 { nombre: 'Peel P50', imagen: 'imagenes/Forza/superRuleta/Peel/P50.png' }
             ]
@@ -194,7 +194,7 @@ const autosPorMarca = {
     ],
     'Pontiac': [
         {
-            logo: 'imagenes/Forza/logos/pontiac.svg',
+            logo: 'imagenes/Forza/logos/pontiac.png',
             autos: [
                 { nombre: 'Pontiac Trans Am Forza Edition', imagen: 'imagenes/Forza/superRuleta/Pontiac/Trans Am FE.png' }
             ]
@@ -202,7 +202,7 @@ const autosPorMarca = {
     ],
     'Porsche': [
         {
-            logo: 'imagenes/Forza/logos/porsche.svg',
+            logo: 'imagenes/Forza/logos/porsche.png',
             autos: [
                 { nombre: 'Porsche 917 LH', imagen: 'imagenes/Forza/superRuleta/Porsche/917 LH.png' },
                 { nombre: 'Porsche 911 Carrera RS', imagen: 'imagenes/Forza/superRuleta/Porsche/911 Carrera RS.png' }
@@ -211,7 +211,7 @@ const autosPorMarca = {
     ],
     'Rimac': [
         {
-            logo: 'imagenes/Forza/logos/rimac.svg',
+            logo: 'imagenes/Forza/logos/rimac.png',
             autos: [
                 { nombre: 'Rimac Concept Two', imagen: 'imagenes/Forza/superRuleta/Rimac/Concept Two.png' }
             ]
@@ -219,7 +219,7 @@ const autosPorMarca = {
     ],
     'Shelby': [
         {
-            logo: 'imagenes/Forza/logos/shelby.svg',
+            logo: 'imagenes/Forza/logos/shelby.png',
             autos: [
                 { nombre: 'Shelby Cobra', imagen: 'imagenes/Forza/superRuleta/Shelby/Cobra.png' }
             ]
@@ -227,7 +227,7 @@ const autosPorMarca = {
     ],
     'Zenvo': [
         {
-            logo: 'imagenes/Forza/logos/zenvo.svg',
+            logo: 'imagenes/Forza/logos/zenvo.png',
             autos: [
                 { nombre: 'Zenvo TSR-S', imagen: 'imagenes/Forza/superRuleta/Zenvo/TSR-S.png' }
             ]

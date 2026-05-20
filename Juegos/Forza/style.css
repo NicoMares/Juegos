@@ -1,0 +1,1098 @@
+/* 
+========================================================================
+   FORZA HORIZON 6 - SUPER WHEELSPIN DATABASE & PROGRESS CHECKLIST
+   Hoja de estilos principal - Premium Dark & Neon Red
+========================================================================
+*/
+
+/* --- Importación de Fuentes Premium --- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Outfit:wght@300;400;600;700;900&display=swap');
+
+/* --- Variables y Sistema de Diseño --- */
+:root {
+    --bg-base: #060609;
+    --bg-surface: #101014;
+    --bg-surface-elevated: #16161d;
+    
+    --color-primary: #ff1e42;
+    --color-primary-rgb: 255, 30, 66;
+    --color-secondary: #e10600;
+    --color-dark: #000000;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --rarity-common: #94a3b8;
+    --rarity-rare: #3b82f6;
+    --rarity-epic: #a855f7;
+    --rarity-legendary: #eab308;
+    --rarity-forza: #ec4899;
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-data: 'JetBrains Mono', monospace;
+    
+    --glow-light: 0 0 15px rgba(var(--color-primary-rgb), 0.2);
+    --glow-strong: 0 0 25px rgba(var(--color-primary-rgb), 0.55);
+    
+    --border-radius: 12px;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- Reseteo de Caja e Inicialización --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    overflow-x: hidden;
+    line-height: 1.5;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(var(--color-primary-rgb), 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(var(--color-primary-rgb), 0.03) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Ocultar barra de desplazamiento predeterminada de Windows y estilizarla */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+    background: #1b1b24;
+    border-radius: 5px;
+    border: 2px solid var(--bg-base);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+    box-shadow: var(--glow-light);
+}
+
+/* --- Estructura y Contenedores --- */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- NAVBAR SUPERIOR --- */
+.navbar {
+    background: rgba(var(--bg-base), 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 18px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon-svg {
+    width: 32px;
+    height: 32px;
+    color: var(--color-primary);
+    filter: drop-shadow(0 0 5px var(--color-primary));
+}
+
+.brand-title {
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff 40%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-title span {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.telemetry-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    background: rgba(255, 30, 66, 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+    padding: 6px 14px;
+    border-radius: 50px;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse-dot 1.8s infinite;
+    box-shadow: var(--glow-light);
+}
+
+@keyframes pulse-dot {
+    0% { transform: scale(0.85); opacity: 0.5; }
+    50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 10px var(--color-primary); }
+    100% { transform: scale(0.85); opacity: 0.5; }
+}
+
+/* --- HERO & DASHBOARD DE PROGRESO --- */
+.hero-section {
+    padding: 50px 0 30px;
+}
+
+.dashboard-panel {
+    background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(22, 22, 29, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-panel::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Izquierda del Dashboard: Progreso */
+.progress-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+.progress-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.progress-percentage {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--text-primary);
+    font-family: var(--font-data);
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.progress-track-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    height: 10px;
+    border-radius: 5px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    margin-bottom: 12px;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+    height: 100%;
+    width: 0%; /* Controlado reactivamente por JS */
+    border-radius: 5px;
+    transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.progress-counters {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.counter-value {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Derecha del Dashboard: Estadísticas de Telemetría */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stat-card.active-spent {
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.stat-card.remaining-needed {
+    border-bottom: 2px solid var(--text-muted);
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.stat-number {
+    font-size: 16px;
+    font-weight: 800;
+    font-family: var(--font-data);
+}
+
+.text-cr {
+    color: #eab308; /* Oro Créditos */
+}
+
+.text-sp {
+    color: #ff1e42; /* Rojo Habilidades */
+}
+
+.stat-spent-icon {
+    font-size: 11px;
+    color: #10b981; /* Verde Telemetría invertida */
+    margin-top: 4px;
+}
+
+.dashboard-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 18px;
+    margin-top: 10px;
+}
+
+.action-btn-danger {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.action-btn-danger:hover {
+    color: var(--text-primary);
+    background: rgba(255, 30, 66, 0.05);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* --- GRID DE SELECCIÓN DE MARCAS (1:1 Estilo del usuario) --- */
+.brands-section {
+    padding: 20px 0 50px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.section-label {
+    font-size: 12px;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-label::after {
+    content: '';
+    height: 1px;
+    background: var(--color-primary);
+    flex-grow: 1;
+    max-width: 100px;
+    opacity: 0.5;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en mobile */
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .brands-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablet pequeña */
+    }
+}
+
+@media (min-width: 900px) {
+    .brands-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas en desktop */
+    }
+}
+
+@media (min-width: 1200px) {
+    .brands-grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas idéntico a la captura */
+    }
+}
+
+.brand-card {
+    background: linear-gradient(145deg, #16161b 0%, #0d0d10 100%);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Efecto de degradado / resplandor rojo detrás de los logos */
+.brand-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.28) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.brand-logo-container {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    opacity: 0.85;
+    transition: var(--transition-smooth);
+    z-index: 2;
+}
+
+.brand-svg {
+    max-height: 100%;
+    max-width: 80%;
+    transition: var(--transition-smooth);
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+/* --- Estados Hover y Activo en Tarjetas de Marca --- */
+.brand-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--color-primary-rgb), 0.35);
+    box-shadow: 0 10px 25px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.brand-card:hover .brand-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.35);
+}
+
+.brand-card:hover .brand-logo-container {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.brand-card:hover .brand-name {
+    color: var(--color-primary);
+}
+
+.brand-card.active {
+    border-color: var(--color-primary);
+    background: linear-gradient(145deg, #1e1215 0%, #0d0d10 100%);
+    box-shadow: 0 0 30px rgba(var(--color-primary-rgb), 0.2);
+}
+
+.brand-card.active .brand-glow {
+    opacity: 1.2;
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.45) 0%, transparent 70%);
+}
+
+.brand-card.active .brand-logo-container {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+.brand-card.active .brand-name {
+    color: var(--text-primary);
+    font-weight: 800;
+}
+
+/* --- CONTROLES Y FILTROS DEL PANEL DE VEHÍCULOS --- */
+.vehicles-section {
+    padding: 50px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.filter-bar {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Buscador */
+.search-box-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 14px 20px 14px 45px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--glow-light);
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.search-input:focus + .search-icon {
+    color: var(--color-primary);
+}
+
+/* Agrupación de filtros de fila */
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Botones de Filtro */
+.btn-group {
+    display: flex;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.class-filter-btn, .rarity-filter-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.class-filter-btn:hover, .rarity-filter-btn:hover {
+    color: var(--text-primary);
+}
+
+.class-filter-btn.active, .rarity-filter-btn.active {
+    background: var(--color-primary);
+    color: var(--text-primary);
+    box-shadow: var(--glow-light);
+}
+
+/* Selector Select */
+.sort-select {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* Botón de reinicio */
+.btn-reset {
+    background: transparent;
+    border: 1px dashed rgba(var(--color-primary-rgb), 0.3);
+    color: var(--color-primary);
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+}
+
+.btn-reset:hover {
+    background: var(--color-primary);
+    color: var(--text-primary);
+    border-style: solid;
+    border-color: var(--color-primary);
+    box-shadow: var(--glow-light);
+}
+
+.reset-icon-svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- GRID DE TARJETAS DE VEHÍCULOS (Estilo Telemetría) --- */
+.vehicles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 640px) {
+    .vehicles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .vehicles-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tarjeta base del auto */
+.car-card {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: var(--transition-smooth);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.car-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--rarity-common);
+    transition: var(--transition-smooth);
+}
+
+/* Bordes superiores personalizados por Rareza */
+.car-card.rarity-common::before { background-color: var(--rarity-common); }
+.car-card.rarity-rare::before { background-color: var(--rarity-rare); }
+.car-card.rarity-epic::before { background-color: var(--rarity-epic); }
+.car-card.rarity-legendary::before { background-color: var(--rarity-legendary); }
+.car-card.rarity-forza_edition::before { background-color: var(--rarity-forza); }
+
+.car-badge-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 3;
+}
+
+.class-badge {
+    font-family: var(--font-data);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.class-x { background-color: #7c2d12; }
+.class-s2 { background-color: #b91c1c; }
+.class-s1 { background-color: #ea580c; }
+.class-a { background-color: #1d4ed8; }
+.class-b { background-color: #0d9488; }
+.class-c { background-color: #059669; }
+.class-d { background-color: #4b5563; }
+
+.rarity-badge {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid currentColor;
+}
+
+.rarity-common .rarity-badge { color: var(--rarity-common); }
+.rarity-rare .rarity-badge { color: var(--rarity-rare); }
+.rarity-epic .rarity-badge { color: var(--rarity-epic); }
+.rarity-legendary .rarity-badge { color: var(--rarity-legendary); }
+.rarity-forza .rarity-badge { color: var(--rarity-forza); }
+
+/* Cuerpo interno de la tarjeta */
+.car-body {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Espacio de la silueta vectorial del auto */
+.car-visuals {
+    height: 120px;
+    width: 100%;
+    margin: 20px 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    opacity: 0.35;
+    transition: var(--transition-smooth);
+}
+
+.car-silhouette {
+    max-height: 100%;
+    max-width: 90%;
+    transition: var(--transition-smooth);
+}
+
+.car-header-details {
+    margin-top: 10px;
+}
+
+.car-brand-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.car-model-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-top: 2px;
+    line-height: 1.2;
+}
+
+.car-year {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 4px;
+}
+
+/* Telemetría y árbol de habilidades */
+.car-telemetry {
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.telemetry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.telemetry-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.telemetry-value {
+    font-family: var(--font-data);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.telemetry-desc {
+    margin-top: 4px;
+}
+
+.d-block { display: block; }
+.mb-1 { margin-bottom: 4px; }
+
+.telemetry-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Barra de acción con el checkbox estilo carrera */
+.car-action-bar {
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 15px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo Interruptor Desbloqueo */
+.progress-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+}
+
+.progress-checkbox {
+    display: none;
+}
+
+.progress-slider {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    background-color: #1e1e24;
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: var(--transition-smooth);
+}
+
+.progress-slider::before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-muted);
+    border-radius: 50%;
+    transition: var(--transition-smooth);
+}
+
+.progress-status-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+}
+
+/* Hover e interacciones en card */
+.car-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.car-card:hover .car-visuals {
+    opacity: 0.85;
+    color: var(--color-primary);
+    transform: scale(1.04);
+}
+
+/* Estado activo cuando el carro está desbloqueado */
+.progress-checkbox:checked + .progress-slider {
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+    border-color: var(--color-primary);
+    box-shadow: var(--glow-light);
+}
+
+.progress-checkbox:checked + .progress-slider::before {
+    transform: translateX(22px);
+    background-color: var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
+}
+
+.progress-checkbox:checked ~ .progress-status-label {
+    color: var(--color-primary);
+    font-weight: 900;
+    text-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.4);
+}
+
+/* Efecto de borde de tarjeta cuando está desbloqueado */
+.car-card.unlocked-active {
+    border-color: rgba(var(--color-primary-rgb), 0.28);
+    box-shadow: 0 10px 25px rgba(var(--color-primary-rgb), 0.08);
+}
+
+.car-card.unlocked-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.22);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+}
+
+/* --- PANEL SIN RESULTADOS --- */
+.no-results-panel {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--bg-surface);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.no-results-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--text-muted);
+}
+
+.no-results-panel h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.no-results-panel p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 400px;
+}
+
+/* --- FOOTER INFORMATIVO --- */
+.footer {
+    background-color: #060609;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-logo {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+.footer-logo span {
+    color: var(--color-primary);
+}
+
+.footer-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.footer-credit {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-data);
+}
+
+/* --- MEDIA QUERIES RESPONSIVAS ADICIONALES --- */
+@media (min-width: 768px) {
+    .dashboard-panel {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .filter-bar {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 639px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+        align-items: fill;
+        width: 100%;
+    }
+    
+    .btn-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    }
+    
+    .sort-select {
+        width: 100%;
+    }
+    
+    .btn-reset {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --- Soporte para imágenes personalizadas de Marcas y Autos --- */
+.brand-img {
+    max-height: 50px;
+    max-width: 80%;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
+
+.car-img {
+    max-height: 100px;
+    max-width: 90%;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.car-card:hover .car-img {
+    transform: scale(1.05) translateY(-3px);
+    filter: drop-shadow(0 8px 15px rgba(var(--color-primary-rgb), 0.35));
+}

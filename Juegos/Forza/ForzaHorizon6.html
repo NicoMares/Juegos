@@ -3,133 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
-
-     <!-- Link a la Pagina "Fontawesome" para que funcionen algunos logos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Nombre del archivo css -->
-    <link rel="stylesheet" href="estilos.css">
-
-    <!-- Icono de la pestaña -->
-    <link rel="icon" href="imagenes/logos/Portada_FH6.png" type="image/x-icon"> 
-
-<!-- Nombre De la pagina (lo que figura en la barra de google) -->
-    <title>FH6 Helper | Nicolas Mares 🙂</title>
-   
-  
-   
-   
-
+    <title>Base de Datos de SuperRuletas | Forza Horizon 6 Tracker</title>
+    <meta name="description" content="Base de datos interactiva de alta fidelidad para rastrear qué vehículos en Forza Horizon 6 contienen una SuperRuleta (Super Wheelspin) en su maestría de auto.">
+    <!-- Enlace de Estilos -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <nav class="cabecera">
-        <a href="#inicio" class="logo"></a>
-        <ul class="cabecera-links">
-            <li><a href="#presentacion">Inicio</a></li>
-             <li><a href="#sobreMi">Marcas Disponibles</a></li>
-            <li><a href="#tecnologias">Tecnologias</a></li>
-            <li><a href="#redes-sociales">Redes</a></li>
-        </ul>
+
+    <!-- NAVBAR DE COMPETICIÓN -->
+    <nav class="navbar" id="app-navbar">
+        <div class="container">
+            <div class="brand-wrapper">
+                <!-- Icono de Velocímetro/Competición SVG -->
+                <link rel="icon" href="Logos/Portada_FH6.png" type="image/x-icon"> 
+                </svg>
+                <h1 class="brand-title">FORZA HORIZON 6 <span>/ Base de Datos</span></h1>
+            </div>
+            <div class="telemetry-status" id="telemetry-status-panel">
+                <span class="status-dot"></span>
+                <span>TELEMETRÍA DE RULETAS ACTIVA</span>
+            </div>
+        </div>
     </nav>
 
-    <!-- Seccion Presentacion -->
-    <section id="presentacion" class="presentacion">
-        <div class="contenido-presentacion">
-            <h1>Forza Horizon 6 </h1>
-            <p>😎Poder Desbloquear Vehiculos Ocultos</p>
-            <p>🔥Poder Farmear Super Wheel Spins</p>
-           
-            
-            
-           
-           
-            <p>Notas algun fallo?</p>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container">
 
-            <a href="mailto:nikomares04@gmail.com" class="contacto"> Contactame</a>
-            
-        </div>
-        <div class="imagen-presentacion">
-
-            <img src="imagenes/logos/Portada_FH6.png" alt="logo Del Forza " class="foto-perfil">
-          
-        </div>
-    </section>
-
-    <section class="titulo-SobreMI"> 
-        <h1>Sobre esta WEB:</h1>
-        <section class="SobreMI" id="sobreMi">
-            <div class="sobreMI-texto">
-               
-  <p>--------------------------------------------------------------------------------------------------------------</p>
-                <h2>Con esta Pagina Podras saber que vehiculos Tienen una Super Wheel Spin, de forma TOTALMENTE Gratuita </h2>
+        <!-- DASHBOARD DE PROGRESO GENERAL -->
+        <section class="hero-section" id="hero-progress-section">
+            <div class="dashboard-panel" id="progress-dashboard">
                 
-                <h2>NO GARANTIZO QUE TODOS LOS AUTOS TENGAN Super Ruleta (son al menos los que yo si tengo)</h2>
+                <!-- Columna Izquierda: Porcentaje y Barra de Progreso -->
+                <div class="progress-meta">
+                    <div class="progress-header">
+                        <span class="progress-title">Progreso de Desbloqueo</span>
+                        <span class="progress-percentage" id="ui-progress-percent">0%</span>
+                    </div>
+                    
+                    <div class="progress-track-wrapper">
+                        <div class="progress-bar-fill" id="ui-progress-bar"></div>
+                    </div>
+                    
+                    <div class="progress-counters">
+                        <span>Vehículos Completados: <span class="counter-value" id="ui-unlocked-count">0 / 0</span></span>
+                        <span>Total Base de Datos</span>
+                    </div>
+                </div>
 
-               <p> --------------------------------------------------------------------------------------------------------------</p>
-      
-        
-                
+                <!-- Columna Derecha: Estadísticas de Habilidades e Inversión -->
+                <div class="stats-grid">
+                    
+                    <!-- Tarjeta: Créditos Invertidos -->
+                    <div class="stat-card active-spent" id="stat-credits-spent">
+                        <div>
+                            <span class="stat-label">CRÉDITOS INVERTIDOS</span>
+                            <div class="stat-number text-cr" id="ui-credits-spent">0 CR</div>
+                        </div>
+                        <div class="stat-spent-icon">✔ YA COMPRADO</div>
+                    </div>
 
-    <!-- Funcion del Java que Muestra los autos -->
+                    <!-- Tarjeta: Puntos Invertidos -->
+                    <div class="stat-card active-spent" id="stat-points-spent">
+                        <div>
+                            <span class="stat-label">PUNTOS DE HABILIDAD SP</span>
+                            <div class="stat-number text-sp" id="ui-points-spent">0 SP</div>
+                        </div>
+                        <div class="stat-spent-icon">✔ RAMA DESBLOQUEADA</div>
+                    </div>
 
-     <div id="marcas">
+                    <!-- Tarjeta: Créditos Faltantes -->
+                    <div class="stat-card remaining-needed" id="stat-credits-remaining">
+                        <div>
+                            <span class="stat-label">CRÉDITOS RESTANTES</span>
+                            <div class="stat-number text-cr" id="ui-credits-remaining">0 CR</div>
+                        </div>
+                        <div class="stat-spent-icon" style="color: var(--text-muted);">⌛ PENDIENTE</div>
+                    </div>
+
+                    <!-- Tarjeta: Puntos Faltantes -->
+                    <div class="stat-card remaining-needed" id="stat-points-remaining">
+                        <div>
+                            <span class="stat-label">PUNTOS SP RESTANTES</span>
+                            <div class="stat-number text-sp" id="ui-points-remaining">0 SP</div>
+                        </div>
+                        <div class="stat-spent-icon" style="color: var(--text-muted);">⌛ PENDIENTE</div>
+                    </div>
+
+                </div>
+
             </div>
-    <div id="autos-marca" class="lista-vehiculos">
-       
-    </div>
-</section>
-<button id="volver-marcas" style="display:none;margin-bottom:20px;">Volver a marcas</button>
-
-    <!-- tecnologias que Conozco -->
-    <section id="tecnologias" class="tecnologias">
-        <div class="tecnologias">
-            <h2>Tecnologías Utilizadas</h2>
-        </div>
-        <div class="lista-tecnologias">
-           
             
-            <div class="tecnologias-caja">
-                <img src="Imagenes/Tecnologia/html.png" class="tech" alt="HTML">
+            <div class="dashboard-footer">
+                <button class="action-btn-danger" id="reset-progress-btn">REINICIAR PROGRESO</button>
             </div>
-            <div class="tecnologias-caja">
-                <img src="Imagenes/Tecnologia/css.png" class="tech" alt="CSS">
-            </div>
-           
-            <div class="tecnologias-caja">
-                <img src="Imagenes/Tecnologia/github.png" class="tech" alt="GitHub">
-            </div>
-            <div class="tecnologias-caja">
-                <img src="Imagenes/Tecnologia/vscode.png" class="tech" alt="VSCode">
-            </div>
-            <div class="tecnologias-caja">
-                <img src="Imagenes/Tecnologia/javaScript.png" class="tech" alt="JavaScript">
-               
-            </div>
-           
-        </div>
-    </section>
+        </section>
 
+        <!-- SECCIÓN DE MARCAS (GRID 1:1 MEJORADO) -->
+        <section class="brands-section" id="brands-selection-section">
+            <div class="section-header">
+                <span class="section-label">Garaje de Competición</span>
+                <h2 class="section-title">SELECCIONA UNA MARCA</h2>
+            </div>
+            
+            <!-- Contenedor del Grid de Marcas -->
+            <div class="brands-grid" id="brands-grid">
+                <!-- Inyectado dinámicamente mediante JS para evitar rotura de enlaces -->
+            </div>
+        </section>
 
+        <!-- SECCIÓN DE VEHÍCULOS CON FILTROS -->
+        <section class="vehicles-section" id="vehicles-section">
+            
+            <div class="section-header">
+                <span class="section-label" id="vehicle-section-label">Filtros de Telemetría</span>
+                <h2 class="section-title" id="selected-brand-title">Todos los vehículos</h2>
+            </div>
 
+            <!-- Panel Completo de Filtros y Controles -->
+            <div class="filter-bar" id="filters-container">
+                
+                <!-- Fila Superior: Buscador -->
+                <div class="search-box-wrapper">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar vehículo por modelo, marca o año (ej: Jesko, 2020, Nissan)...">
+                    <!-- Icono de Lupa SVG -->
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>Copyright ©2026 Nicolás Mares.</p>
-        <section id="redes-sociales" class="redes-sociales">
-            <a href="https://github.com/NicoMares"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/nicolasmares__/"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/nicolas-mares-b94391362/"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.facebook.com/nicolas.mares.7906?mibextid=wwXIfr&rdid=Y2WMOHe7w6u8tAOd&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F167bedVzhX%2F%3Fmibextid%3DwwXIfr#"><i class="fab fa-facebook"></i></a>
-          
+                <!-- Fila Inferior: Controles de Filtros y Ordenamiento -->
+                <div class="filter-row">
+                    
+                    <!-- Filtros por Clase de Auto -->
+                    <div class="filter-group" id="class-filters-group">
+                        <span class="filter-label">Clase de Auto:</span>
+                        <div class="btn-group">
+                            <button class="class-filter-btn active" data-class="ALL">TODOS</button>
+                            <button class="class-filter-btn" data-class="X">X</button>
+                            <button class="class-filter-btn" data-class="S2">S2</button>
+                            <button class="class-filter-btn" data-class="S1">S1</button>
+                            <button class="class-filter-btn" data-class="A">A</button>
+                            <button class="class-filter-btn" data-class="B">B</button>
+                            <button class="class-filter-btn" data-class="D">D</button>
+                        </div>
+                    </div>
+
+                    <!-- Filtros por Rareza de Auto -->
+                    <div class="filter-group" id="rarity-filters-group">
+                        <span class="filter-label">Rareza:</span>
+                        <div class="btn-group">
+                            <button class="rarity-filter-btn active" data-rarity="ALL">TODAS</button>
+                            <button class="rarity-filter-btn" data-rarity="Common">Común</button>
+                            <button class="rarity-filter-btn" data-rarity="Rare">Raro</button>
+                            <button class="rarity-filter-btn" data-rarity="Epic">Épico</button>
+                            <button class="rarity-filter-btn" data-rarity="Legendary">Legendario</button>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por Ordenamiento -->
+                    <div class="filter-group" id="sort-filter-group">
+                        <span class="filter-label">Ordenar por:</span>
+                        <select class="sort-select" id="sort-select">
+                            <option value="alphabetical">Alfabético (Marca/Nombre)</option>
+                            <option value="credits_asc">Precio: Menor a Mayor</option>
+                            <option value="credits_desc">Precio: Mayor a Menor</option>
+                            <option value="points_asc">Puntos de Habilidad: Menor a Mayor</option>
+                            <option value="points_desc">Puntos de Habilidad: Mayor a Menor</option>
+                            <option value="year_desc">Año: Más Reciente</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón Restablecer todo -->
+                    <button class="btn-reset" id="reset-filters">
+                        <svg class="reset-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                        </svg>
+                        REESTABLECER FILTROS
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Contenedor Principal de la Grilla de Vehículos -->
+            <div class="vehicles-grid" id="vehicles-grid">
+                <!-- Se inyecta dinámicamente mediante app.js -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER INFORMATIVO -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">FORZA <span>HORIZON 6</span> DATABASE</div>
+            <p class="footer-text">
+                Esta es una base de datos interactiva, creada por fanáticos, para guiar en la obtención de SuperRuletas (Super Wheelspins) mediante el árbol de Maestría de Habilidades del Auto. Forza Horizon 6 es marca registrada de Microsoft Corporation / Playground Games.
+            </p>
+            <div class="footer-credit">
+                Diseñado bajo directivas Premium de Alta Fidelidad en 2026
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
-  
+    <!-- Script de Lógica Principal -->
+    <script src="app.js"></script>
 </body>
 </html>

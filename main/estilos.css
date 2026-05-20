@@ -20,6 +20,7 @@ body {
     overflow-x: hidden;
     padding-left: 20px;
     padding-right: 20px;
+      box-shadow: 0 16px 20px rgba(22, 214, 240, 0.5); /*Color del Bordecito en Violeta*/
 }
 
 

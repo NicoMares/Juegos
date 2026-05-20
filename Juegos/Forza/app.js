@@ -52,7 +52,7 @@ Termina Comentado */
         "Dodge": {
             name: "Dodge",
            
-            logo: "Logos/dodge.png"
+            logo: "Logos/Dodge.png"
         },
 
 
@@ -169,7 +169,7 @@ Termina Comentado */
           "Porsche": {
             name: "Porsche",
            
-            logo: "Logos/porsche.png"
+            logo: "Logos/Porsche.png"
         },
       
           "Toyota": {

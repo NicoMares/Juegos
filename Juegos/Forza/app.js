@@ -7,46 +7,12 @@
 const DATABASE = {
     brands: {
         
-        /* Empieza Comentado
-        "Audi": {
-            name: "Audi",
-           
-            logo: "Logos/audi.png",
-      
-        },
-          Termina Comentado  
-           */ 
-
            "Aston Martin": {
             name: "Aston Martin",
-            // SVG vectorial estilizado de alta precisión de los 4 aros
+        
             logo: "Logos/Aston Martin.png",
       
         },
-/* Empieza Comentado
-        "BMW": {
-            name: "BMW",
-           
-            logo: "Logos/bmw.svg"
-        },
- Termina Comentado */
- 
- 
-/* Empieza Comentado
-        "Bugatti": {
-            name: "Bugatti",
-         
-            logo: "Logos/bugatti.png"
-        },
-  Termina Comentado */
-
-
-/* Empieza Comentado
-        "Chevrolet": {
-            name: "Chevrolet",
-            logo: "Logos/chevrolet.png"
-        },
-Termina Comentado */
 
 
         "Dodge": {
@@ -56,115 +22,37 @@ Termina Comentado */
         },
 
 
-/*
-        "Ferrari": {
-            name: "Ferrari",
-          
-            logo: "Logos/ferrari.svg"
-        },
-*/
-/*
-        "Ford": {
-            name: "Ford",
-            logo: "Logos/ford.svg"
-        },
-*/
-/*
-        "Jaguar": {
-            name: "Jaguar",
-            
-            logo: "Logos/jaguar.png"
-        },
-*/
-/*
-        "Koenigsegg": {
-            name: "Koenigsegg",
-          
-            logo: "Logos/koenigsegg.png"
-        },
-*/
-/*
         "Lamborghini": {
             name: "Lamborghini",
-          
+            
             logo: "Logos/lamborghini.svg"
         },
-*/
-/*
-        "Lola": {
-            name: "Lola",
+
+         "Lancia": {
+            name: "Lancia",
             
-            logo:"Logos/lola.png"
+            logo: "Logos/Lancia.png"
         },
-        */
         "Lotus": {
             name: "Lotus",
             
             logo:"Logos/Lotus.png"
         },
-/*
-*/
-/*
-        "MG": {
-            name: "MG",
-            logo: "Logos/mg.png"
-        },
-/*
-        "McLaren": {
-            name: "McLaren",
-            
-            logo: "Logos/mclaren.svg"
-        },
-*/
+
 
         "Mercedes-AMG": {
             name: "Mercedes-AMG",
         
             logo: "Logos/mercedes-amg.svg"
         },
-/*
-        "Mercedes-Benz": {
-            name: "Mercedes-Benz",
-         
-            logo: "Logos/mercedes-benz.svg"
-        },
-*/
-/*
 
-        "Napier": {
-            name: "Napier",
-            
-            logo: "Logos/napier.png"
-        },
-*/
-/*
-        "Nissan": {
-            name: "Nissan",
-         
-            logo: "Logos/nissan.png"
-        },
-*/
-/*
-        "Pagani": {
+        
+
+          "Pagani": {
             name: "Pagani",
-          
-            logo: "Logos/pagani.png"
-        },
-*/
-/*
-        "Peel": {
-            name: "Peel",
            
-            logo: "Logos/peel.png"
+            logo: "Logos/Pagani.png"
         },
-*/
-/*
-        "Pontiac": {
-            name: "Pontiac",
-           
-            logo: "Logos/pontiac.png"
-        },
-*/
 
           "Porsche": {
             name: "Porsche",
@@ -177,17 +65,35 @@ Termina Comentado */
            
             logo: "Logos/Toyota.png"
         },
+
+          "Honda": {
+            name: "Honda",
+           
+            logo: "Logos/Honda.png"
+        },
+
+
       
     },
     vehicles: [
-        // AUDI
-        {
-            
-        },
-
+      
         //ASTON MARTIN
         {
-          id: "Vulkan_2016",
+          id: "M1",
+            brand: "BMW",
+            name: "M1 ",
+            year: 1981,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/BMW/M1.png"
+        },
+        // BMW
+        {
+            id: "Vulkan_2016",
             brand: "Aston Martin",
             name: "Vulkan",
             year: 2016,
@@ -199,25 +105,9 @@ Termina Comentado */
             isDlc: false,
             silhouette: "Autos/Aston Martin/Vulkan.png"
         },
-        // BMW
         {
            
-        },
-        {
-           
-        },
-        // BUGATTI
-        {
-           
-        },
-        {
-           
-        },
-        // CHEVROLET
-        {
-           
-        },
-        {
+       
             
         },
         // DODGE
@@ -232,57 +122,52 @@ Termina Comentado */
             skillPoints: 19,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
-            silhouette: "Autos/Dodge/Viper_FE.png"
+            silhouette: "Autos/Dodge/Viper_FE.png",
         },
         {
-          
+              id: "Charger R/T",
+            brand: "Dodge",
+            name: "Charger R/T",
+            year: 1969,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Dodge/Charger_RT.png"
         },
-        // FERRARI
-        {
-          
-        },
-        {
-           
-        },
-        {
-           
-        },
-        // FORD
-        {
-            
-        },
-        {
-           
-        },
-        // JAGUAR
-        {
-           
-        },
-        {
-          
-        },
-        // KOENIGSEGG
-        {
-            
-        },
-        {
-         
+
+         {
         },
         // LAMBORGHINI
         {
-         
+           id: "Essenza",
+            brand: "Lamborghini",
+            name: "Essenza SCV",
+            year: 2020,
+            class: "S2",
+            rarity: "Forza Edition",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Lamborghini/Essenza.png"
         },
-        {
-         
+    /// Lancia
+{
+            id: "Stratos",
+            brand: "Lancia",
+            name: "Stratos HF Stradale",
+            year: 1974,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Lancia/Stratos.png"
         },
-        {
-          
-        },
-        // LOLA
-        {
-           
-        },
-
         // LOTUS
         {
             id: "Evija_FE",
@@ -297,17 +182,8 @@ Termina Comentado */
             isDlc: false,
             silhouette: "Autos/Lotus/Evija.png"
         },
-        // MG
-        {
-       
-        },
-        // MCLAREN
-        {
+     
         
-        },
-        {
-          
-        },
         // MERCEDES-AMG
         {
             id: "amg_one_2021",
@@ -323,39 +199,23 @@ Termina Comentado */
             silhouette: "Autos/Mercedes AMG/AMG ONE.png"
         },
        
-        // MERCEDES-BENZ
-        {
-            
-        },
-        {
-          
-        },
-        // NAPIER
-        {
-          
-        },
-        // NISSAN
-        {
            
-        },
-        {
-           
-        },
+       
         // PAGANI
         {
-            
+           id: "Huarya-R",
+            brand: "Pagani",
+            name: "Huarya R",
+            year: 2021,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Pagani/Huarya-R.png"
         },
-        {
-            
-        },
-        // PEEL
-        {
-          
-        },
-        // PONTIAC
-        {
-           
-        },
+      
 // PORSCHE
         {
             id: "Porsche_FE",
@@ -368,9 +228,27 @@ Termina Comentado */
             skillPoints: 19,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
-            silhouette: "Autos/Porsche/Porsche_FE.png"
+            silhouette: "Autos/Porsche/917_FE.png"
         },
 
+{
+            id: "Porsche_959",
+            brand: "Porsche",
+            name: "959 ",
+            year: 1987,
+            class: "A",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Porsche/959.png"
+        },
+
+ 
+
+
+// Toyota
         {
              id: "Tacoma_FE",
             brand: "Toyota",
@@ -383,6 +261,23 @@ Termina Comentado */
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Toyota/Toyota_FE.png"
+        },
+
+        // Honda
+        {
+  id: "Nsx-R",
+            brand: "Honda",
+            name: "NSX-R GT ",
+            year: 2005,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 0,
+            skillPoints: 19,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Honda/NSX-R.png"
+
+
         }
     ]
 };

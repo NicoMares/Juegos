@@ -91,20 +91,7 @@ const DATABASE = {
             isDlc: false,
             silhouette: "Autos/BMW/M1.png"
         },
-        // BMW
-        {
-            id: "Vulkan_2016",
-            brand: "Aston Martin",
-            name: "Vulkan",
-            year: 2016,
-            class: "S2",
-            rarity: "Legendary",
-            credits: 0,
-            skillPoints: 19,
-            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
-            isDlc: false,
-            silhouette: "Autos/Aston Martin/Vulkan.png"
-        },
+        
         {
            
        
@@ -125,7 +112,7 @@ const DATABASE = {
             silhouette: "Autos/Dodge/Viper_FE.png",
         },
         {
-              id: "Charger R/T",
+              id: "Charger_RT",
             brand: "Dodge",
             name: "Charger R/T",
             year: 1969,
@@ -138,8 +125,7 @@ const DATABASE = {
             silhouette: "Autos/Dodge/Charger_RT.png"
         },
 
-         {
-        },
+        
         // LAMBORGHINI
         {
            id: "Essenza",

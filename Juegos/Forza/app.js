@@ -296,6 +296,19 @@ const DATABASE = {
             isDlc: false,
             silhouette: "Autos/Mazda/RX7.png"
         },
+  {
+            id: "Miata_FE",
+            brand: "Mazda",
+            name: "MX-5 Miata ",
+            year: 1994,
+            class: "S2",
+            rarity: "Forza Edition",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Mazda/Miata_FE.png"
+        },
 
 
         // MERCEDES-AMG

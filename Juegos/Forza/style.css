@@ -23,11 +23,21 @@
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
     
+    --class-x: #34d399;
+    --class-r: #f472b6;
+    --class-s2: #38bdf8;
+    --class-s1: #c084fc;
+    --class-a: #f87171;
+    --class-b: #fb923c;
+    --class-c: #f5e66f;
+    --class-d: #8ce7ff;
+
     --rarity-common: #94a3b8;
     --rarity-rare: #3b82f6;
     --rarity-epic: #a855f7;
     --rarity-legendary: #eab308;
     --rarity-forza: #ec4899;
+    --rarity-r: #f472b6;
 
     --font-heading: 'Outfit', sans-serif;
     --font-data: 'JetBrains Mono', monospace;
@@ -123,6 +133,7 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     background: linear-gradient(135deg, #fff 40%, var(--color-primary) 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -712,7 +723,10 @@ body {
 .car-card.rarity-common::before { background-color: var(--rarity-common); }
 .car-card.rarity-rare::before { background-color: var(--rarity-rare); }
 .car-card.rarity-epic::before { background-color: var(--rarity-epic); }
-.car-card.rarity-legendary::before { background-color: var(--rarity-legendary); }
+.car-card.rarity-legendary::before,
+.car-card.rarity-tesoro::before,
+.car-card.rarity-abandonado::before { background-color: var(--rarity-legendary); }
+.car-card.rarity-r::before { background-color: var(--rarity-r); }
 .car-card.rarity-forza_edition::before { background-color: var(--rarity-forza); }
 
 .car-badge-container {
@@ -736,13 +750,14 @@ body {
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
-.class-x { background-color: #7c2d12; }
-.class-s2 { background-color: #b91c1c; }
-.class-s1 { background-color: #ea580c; }
-.class-a { background-color: #1d4ed8; }
-.class-b { background-color: #0d9488; }
-.class-c { background-color: #059669; }
-.class-d { background-color: #4b5563; }
+.class-x { background-color: var(--class-x); }
+.class-r { background-color: var(--class-r); }
+.class-s2 { background-color: var(--class-s2); }
+.class-s1 { background-color: var(--class-s1); }
+.class-a { background-color: var(--class-a); }
+.class-b { background-color: var(--class-b); }
+.class-c { background-color: var(--class-c); }
+.class-d { background-color: var(--class-d); }
 
 .rarity-badge {
     font-size: 10px;
@@ -758,8 +773,11 @@ body {
 .rarity-common .rarity-badge { color: var(--rarity-common); }
 .rarity-rare .rarity-badge { color: var(--rarity-rare); }
 .rarity-epic .rarity-badge { color: var(--rarity-epic); }
-.rarity-legendary .rarity-badge { color: var(--rarity-legendary); }
-.rarity-forza .rarity-badge { color: var(--rarity-forza); }
+.rarity-legendary .rarity-badge,
+.rarity-tesoro .rarity-badge,
+.rarity-abandonado .rarity-badge { color: var(--rarity-legendary); }
+.rarity-r .rarity-badge { color: var(--rarity-r); }
+.rarity-forza_edition .rarity-badge { color: var(--rarity-forza); }
 
 /* Cuerpo interno de la tarjeta */
 .car-body {
@@ -858,18 +876,26 @@ body {
     line-height: 1.4;
 }
 
-/* Barra de acción con el checkbox estilo carrera */
+/* Barra de acción con los checkboxes de progreso y maestría */
 .car-action-bar {
     background: rgba(0, 0, 0, 0.4);
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding: 15px 24px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
+}
+
+.car-action-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 /* Estilo Interruptor Desbloqueo */
-.progress-switch {
+.progress-switch,
+.mastery-switch {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -878,11 +904,13 @@ body {
     width: 100%;
 }
 
-.progress-checkbox {
+.progress-checkbox,
+.mastery-checkbox {
     display: none;
 }
 
-.progress-slider {
+.progress-slider,
+.mastery-slider {
     position: relative;
     width: 44px;
     height: 22px;
@@ -892,7 +920,8 @@ body {
     transition: var(--transition-smooth);
 }
 
-.progress-slider::before {
+.progress-slider::before,
+.mastery-slider::before {
     content: "";
     position: absolute;
     height: 14px;
@@ -904,7 +933,8 @@ body {
     transition: var(--transition-smooth);
 }
 
-.progress-status-label {
+.progress-status-label,
+.mastery-status-label {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -945,6 +975,24 @@ body {
     text-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.4);
 }
 
+.mastery-checkbox:checked + .mastery-slider {
+    background-color: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+}
+
+.mastery-checkbox:checked + .mastery-slider::before {
+    transform: translateX(22px);
+    background-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.65);
+}
+
+.mastery-checkbox:checked ~ .mastery-status-label {
+    color: #38bdf8;
+    font-weight: 900;
+    text-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+}
+
 /* Efecto de borde de tarjeta cuando está desbloqueado */
 .car-card.unlocked-active {
     border-color: rgba(var(--color-primary-rgb), 0.28);
@@ -976,6 +1024,137 @@ body {
     align-items: center;
     justify-content: center;
     gap: 16px;
+}
+
+/* --- Feedback de la comunidad --- */
+.feedback-panel {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin-bottom: 35px;
+}
+
+.feedback-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.feedback-card-form {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feedback-card-form h3,
+.feedback-list-panel h3 {
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.feedback-card-form p,
+.feedback-note {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.feedback-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.feedback-input,
+.feedback-textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    background: rgba(0,0,0,0.4);
+    color: var(--text-primary);
+    padding: 12px 14px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    resize: vertical;
+}
+
+.feedback-input:focus,
+.feedback-textarea:focus {
+    outline: none;
+    border-color: rgba(var(--color-primary-rgb), 0.4);
+    box-shadow: var(--glow-light);
+}
+
+.feedback-list-panel {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.feedback-list-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: end;
+    margin-bottom: 16px;
+}
+
+.feedback-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feedback-entry {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.feedback-entry-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.feedback-entry-tag {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(var(--color-primary-rgb), 0.12);
+    color: var(--color-primary);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.feedback-entry-time {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: var(--font-data);
+}
+
+.feedback-entry-message {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.feedback-empty {
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 16px 0;
 }
 
 .no-results-icon {
@@ -1041,6 +1220,10 @@ body {
 @media (min-width: 768px) {
     .dashboard-panel {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .feedback-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .filter-bar {

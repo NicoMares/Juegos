@@ -71,6 +71,15 @@
                         <div class="stat-spent-icon">✔ RAMA DESBLOQUEADA</div>
                     </div>
 
+                    <!-- Tarjeta: Maestrías Completas -->
+                    <div class="stat-card active-spent" id="stat-mastery-completed">
+                        <div>
+                            <span class="stat-label">MAESTRÍAS COMPLETAS</span>
+                            <div class="stat-number text-sp" id="ui-mastered-count">0 / 0</div>
+                        </div>
+                        <div class="stat-spent-icon">✔ CIERRE DE ÁRBOL</div>
+                    </div>
+
                     <!-- Tarjeta: Créditos Faltantes -->
                     <div class="stat-card remaining-needed" id="stat-credits-remaining">
                         <div>
@@ -141,10 +150,12 @@
                         <div class="btn-group">
                             <button class="class-filter-btn active" data-class="ALL">TODOS</button>
                             <button class="class-filter-btn" data-class="X">X</button>
+                            <button class="class-filter-btn" data-class="R">R</button>
                             <button class="class-filter-btn" data-class="S2">S2</button>
                             <button class="class-filter-btn" data-class="S1">S1</button>
                             <button class="class-filter-btn" data-class="A">A</button>
                             <button class="class-filter-btn" data-class="B">B</button>
+                            <button class="class-filter-btn" data-class="C">C</button>
                             <button class="class-filter-btn" data-class="D">D</button>
                         </div>
                     </div>
@@ -158,6 +169,8 @@
                             <button class="rarity-filter-btn" data-rarity="Rare">Raro</button>
                             <button class="rarity-filter-btn" data-rarity="Epic">Épico</button>
                             <button class="rarity-filter-btn" data-rarity="Legendary">Legendario</button>
+                            <button class="rarity-filter-btn" data-rarity="Tesoro">Tesoro</button>
+                            <button class="rarity-filter-btn" data-rarity="Abandonado">Abandonado</button>
                         </div>
                     </div>
 
@@ -185,6 +198,49 @@
                 </div>
 
             </div>
+
+            <section class="feedback-panel" aria-labelledby="feedback-title">
+                <div class="section-header">
+                    <span class="section-label">Sondeo de la comunidad</span>
+                    <h2 class="section-title" id="feedback-title">Feedback y vehículos faltantes</h2>
+                </div>
+
+                <div class="feedback-grid">
+                    <form class="feedback-card-form" id="error-feedback-form">
+                        <h3>Reportar un error</h3>
+                        <p>Si encontraste algo incorrecto en la base de datos o una imagen que no coincide, avísanos.</p>
+                        <label class="feedback-label" for="error-message">Descripción del error</label>
+                        <textarea id="error-message" class="feedback-textarea" rows="4" placeholder="Ej: El auto X aparece con la marca equivocada o falta una ruleta." required></textarea>
+                        <button type="submit" class="btn-reset">Enviar reporte</button>
+                    </form>
+
+                    <form class="feedback-card-form" id="missing-vehicle-form">
+                        <h3>Agregar vehículo con Super Ruleta</h3>
+                        <p>Si conoces un auto que debería estar y no aparece, déjanos marca, modelo y una nota breve.</p>
+
+                        <label class="feedback-label" for="missing-brand">Marca</label>
+                        <input id="missing-brand" class="feedback-input" type="text" placeholder="Ej: Porsche" required>
+
+                        <label class="feedback-label" for="missing-name">Modelo</label>
+                        <input id="missing-name" class="feedback-input" type="text" placeholder="Ej: 959" required>
+
+                        <label class="feedback-label" for="missing-notes">Notas o evidencia</label>
+                        <textarea id="missing-notes" class="feedback-textarea" rows="4" placeholder="Ej: Tiene Super Ruleta en su árbol de maestría y lo vi en Forza Horizon 6." required></textarea>
+                        <button type="submit" class="btn-reset">Guardar sugerencia</button>
+                    </form>
+                </div>
+
+                <div class="feedback-list-panel">
+                    <div class="feedback-list-header">
+                        <div>
+                            <p class="section-label">Comentarios comunitarios</p>
+                            <h3>Últimos reportes y sugerencias</h3>
+                        </div>
+                        <p id="feedback-status" class="feedback-note">Aún no hay comentarios guardados.</p>
+                    </div>
+                    <div id="feedback-list" class="feedback-list"></div>
+                </div>
+            </section>
 
             <!-- Contenedor Principal de la Grilla de Vehículos -->
             <div class="vehicles-grid" id="vehicles-grid">

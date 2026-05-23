@@ -525,27 +525,101 @@ let classFilter = "ALL";
 let rarityFilter = "ALL";
 let activeSort = "alphabetical"; // alphabetical, credits_asc, credits_desc, points_asc, points_desc, year_desc
 let unlockedCars = new Set(); // Guarda los IDs de los autos desbloqueados
+let masteryCompletedCars = new Set(); // Guarda los IDs de autos con maestría completa
+let feedbackEntries = [];
+
+const STORAGE_KEYS = {
+    unlocked: "fh6_unlocked_cars",
+    mastery: "fh6_mastery_completed_cars",
+    feedback: "fh6_feedback_entries"
+};
+
+function loadSet(key, set) {
+    try {
+        const stored = localStorage.getItem(key);
+        if (stored) {
+            const arr = JSON.parse(stored);
+            if (Array.isArray(arr)) {
+                set.clear();
+                arr.forEach(item => set.add(item));
+            }
+        }
+    } catch (e) {
+        console.error(`Error al cargar ${key}:`, e);
+    }
+}
+
+function saveSet(key, set) {
+    try {
+        localStorage.setItem(key, JSON.stringify(Array.from(set)));
+    } catch (e) {
+        console.error(`Error al guardar ${key}:`, e);
+    }
+}
+
+function loadFeedbackEntries() {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEYS.feedback);
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed)) {
+                feedbackEntries = parsed;
+            }
+        }
+    } catch (e) {
+        console.error("Error al cargar feedback:", e);
+    }
+}
+
+function saveFeedbackEntries() {
+    try {
+        localStorage.setItem(STORAGE_KEYS.feedback, JSON.stringify(feedbackEntries));
+    } catch (e) {
+        console.error("Error al guardar feedback:", e);
+    }
+}
+
+function normalizeRarityKey(rarity) {
+    return String(rarity || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_");
+}
+
+function escapeHTML(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
 
 // Carga Inicial del Progreso (Checklist) desde localStorage
 function loadProgreso() {
-    try {
-        const stored = localStorage.getItem("fh6_unlocked_cars");
-        if (stored) {
-            const arr = JSON.parse(stored);
-            unlockedCars = new Set(arr);
-        }
-    } catch (e) {
-        console.error("Error al cargar localStorage:", e);
-    }
+    loadSet(STORAGE_KEYS.unlocked, unlockedCars);
+    loadSet(STORAGE_KEYS.mastery, masteryCompletedCars);
+    loadFeedbackEntries();
 }
 
 // Guarda el Progreso (Checklist) en localStorage
 function saveProgreso() {
-    try {
-        localStorage.setItem("fh6_unlocked_cars", JSON.stringify(Array.from(unlockedCars)));
-    } catch (e) {
-        console.error("Error al guardar en localStorage:", e);
-    }
+    saveSet(STORAGE_KEYS.unlocked, unlockedCars);
+    saveSet(STORAGE_KEYS.mastery, masteryCompletedCars);
+}
+
+function addFeedbackEntry(type, title, message) {
+    feedbackEntries.unshift({
+        id: Date.now(),
+        type,
+        title,
+        message,
+        createdAt: new Date().toISOString()
+    });
+
+    feedbackEntries = feedbackEntries.slice(0, 12);
+    saveFeedbackEntries();
+    renderFeedbackFeed();
 }
 
 // Inicialización de la Aplicación al Cargar el DOM
@@ -553,6 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadProgreso();
     initDOMEvents();
     renderBrandsGrid();
+    renderFeedbackFeed();
     renderVehicles();
     updateProgressDashboard();
 });
@@ -626,12 +701,49 @@ function initDOMEvents() {
         });
     }
 
+    const errorForm = document.getElementById("error-feedback-form");
+    if (errorForm) {
+        errorForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const textarea = document.getElementById("error-message");
+            const message = textarea?.value.trim();
+            if (!message) return;
+
+            addFeedbackEntry("error", "Reporte de error", message);
+            if (textarea) textarea.value = "";
+        });
+    }
+
+    const missingVehicleForm = document.getElementById("missing-vehicle-form");
+    if (missingVehicleForm) {
+        missingVehicleForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const brand = document.getElementById("missing-brand")?.value.trim();
+            const name = document.getElementById("missing-name")?.value.trim();
+            const notes = document.getElementById("missing-notes")?.value.trim();
+
+            if (!brand || !name || !notes) return;
+
+            addFeedbackEntry(
+                "missing_vehicle",
+                `Vehículo faltante: ${brand} ${name}`,
+                `Marca: ${brand}\nModelo: ${name}\nNotas: ${notes}`
+            );
+
+            document.getElementById("missing-brand").value = "";
+            document.getElementById("missing-name").value = "";
+            document.getElementById("missing-notes").value = "";
+        });
+    }
+
     // Botón para resetear todo el progreso
     const resetProgressBtn = document.getElementById("reset-progress-btn");
     if (resetProgressBtn) {
         resetProgressBtn.addEventListener("click", () => {
             if (confirm("¿Estás seguro de que deseas reiniciar todo tu progreso de desbloqueos?")) {
                 unlockedCars.clear();
+                masteryCompletedCars.clear();
                 saveProgreso();
                 updateProgressDashboard();
                 renderVehicles();
@@ -649,6 +761,34 @@ function renderMedia(content, className) {
     }
     // De lo contrario, se asume que es una ruta de imagen (ej. assets/logo.png) o URL
     return `<img src="${content}" alt="Imagen" class="${className}">`;
+}
+
+function renderFeedbackFeed() {
+    const container = document.getElementById("feedback-list");
+    const status = document.getElementById("feedback-status");
+
+    if (!container) return;
+
+    if (feedbackEntries.length === 0) {
+        container.innerHTML = '<p class="feedback-empty">Aún no hay reportes ni sugerencias guardadas. Sé el primero en avisar de una omisión.</p>';
+        if (status) status.textContent = "Aún no hay comentarios guardados.";
+        return;
+    }
+
+    container.innerHTML = feedbackEntries.map(entry => `
+        <article class="feedback-entry">
+            <div class="feedback-entry-header">
+                <span class="feedback-entry-tag">${escapeHTML(entry.type === 'error' ? 'Reporte de error' : 'Vehículo faltante')}</span>
+                <span class="feedback-entry-time">${escapeHTML(new Date(entry.createdAt).toLocaleString('es-AR'))}</span>
+            </div>
+            <p class="feedback-entry-message"><strong>${escapeHTML(entry.title)}</strong></p>
+            <p class="feedback-entry-message">${escapeHTML(entry.message).replace(/\n/g, '<br>')}</p>
+        </article>
+    `).join('');
+
+    if (status) {
+        status.textContent = `${feedbackEntries.length} comentario${feedbackEntries.length === 1 ? '' : 's'} disponible${feedbackEntries.length === 1 ? '' : 's'}.`;
+    }
 }
 
 // Renderizado de las Tarjetas de Marcas (Grid al estilo de la captura provista)
@@ -702,29 +842,23 @@ function renderVehicles() {
     const countSpan = document.getElementById("vehicles-count");
     if (!grid) return;
 
-    // Aplicar Filtros a la Base de Datos
     let filtered = DATABASE.vehicles.filter(car => {
-        // Filtro por marca seleccionada
         if (activeBrand && car.brand !== activeBrand) return false;
 
-        // Filtro por búsqueda de texto (nombre, marca o año)
         if (searchQuery) {
-            const textMatch = car.name.toLowerCase().includes(searchQuery) || 
-                              car.brand.toLowerCase().includes(searchQuery) ||
-                              car.year.toString().includes(searchQuery);
+            const textMatch = car.name.toLowerCase().includes(searchQuery) ||
+                car.brand.toLowerCase().includes(searchQuery) ||
+                car.year.toString().includes(searchQuery);
             if (!textMatch) return false;
         }
 
-        // Filtro por clase de auto
         if (classFilter !== "ALL" && car.class !== classFilter) return false;
 
-        // Filtro por rareza de auto
         if (rarityFilter !== "ALL" && car.rarity !== rarityFilter) return false;
 
         return true;
     });
 
-    // Aplicar Ordenamiento
     filtered.sort((a, b) => {
         switch (activeSort) {
             case "credits_asc":
@@ -739,16 +873,13 @@ function renderVehicles() {
                 return b.year - a.year;
             case "alphabetical":
             default:
-                // Por defecto: Alfabético por Marca y luego por Nombre
                 const brandCompare = a.brand.localeCompare(b.brand);
                 return brandCompare !== 0 ? brandCompare : a.name.localeCompare(b.name);
         }
     });
 
-    // Limpiar Grid
     grid.innerHTML = "";
 
-    // Actualizar conteo de autos mostrados
     if (countSpan) {
         countSpan.textContent = `(${filtered.length})`;
     }
@@ -768,11 +899,12 @@ function renderVehicles() {
         return;
     }
 
-    // Renderizar cada auto
     filtered.forEach(car => {
         const isUnlocked = unlockedCars.has(car.id);
+        const isMastered = masteryCompletedCars.has(car.id);
+        const rarityClass = `rarity-${normalizeRarityKey(car.rarity)}`;
         const card = document.createElement("div");
-        card.className = `car-card rarity-${car.rarity.toLowerCase()} ${isUnlocked ? 'unlocked-active' : ''}`;
+        card.className = `car-card ${rarityClass} ${isUnlocked ? 'unlocked-active' : ''} ${isMastered ? 'mastery-complete' : ''}`;
         card.setAttribute("data-id", car.id);
 
         card.innerHTML = `
@@ -791,14 +923,13 @@ function renderVehicles() {
                 </div>
             </div>
 
-            <!-- Ficha Técnica de Telemetría (Hover State) -->
             <div class="car-telemetry">
                 <div class="telemetry-row">
                     <span class="telemetry-label">PRECIO DE TIENDA:</span>
                     <span class="telemetry-value text-cr">${car.credits.toLocaleString()} CR</span>
                 </div>
                 <div class="telemetry-row">
-                    <span class="telemetry-label">PUNTOS DE HABILIDAD:</span>
+                    <span class="telemetry-label">PUNTOS DE MAESTRÍA:</span>
                     <span class="telemetry-value text-sp">${car.skillPoints} SP</span>
                 </div>
                 <div class="telemetry-desc">
@@ -807,29 +938,50 @@ function renderVehicles() {
                 </div>
             </div>
 
-            <!-- Control del Checklist (Progreso) -->
             <div class="car-action-bar">
-                <label class="progress-switch">
-                    <input type="checkbox" class="progress-checkbox" ${isUnlocked ? 'checked' : ''}>
-                    <span class="progress-slider"></span>
-                    <span class="progress-status-label">${isUnlocked ? 'OBTENIDO' : 'NO OBTENIDO'}</span>
-                </label>
+                <div class="car-action-stack">
+                    <label class="progress-switch">
+                        <input type="checkbox" class="progress-checkbox" ${isUnlocked ? 'checked' : ''}>
+                        <span class="progress-slider"></span>
+                        <span class="progress-status-label">${isUnlocked ? 'OBTENIDO' : 'NO OBTENIDO'}</span>
+                    </label>
+                    <label class="mastery-switch">
+                        <input type="checkbox" class="mastery-checkbox" ${isMastered ? 'checked' : ''}>
+                        <span class="mastery-slider"></span>
+                        <span class="mastery-status-label">${isMastered ? 'MAESTRÍA COMPLETA' : 'MAESTRÍA PENDIENTE'}</span>
+                    </label>
+                </div>
             </div>
         `;
 
-        // Evento del Checkbox del progreso
         const checkbox = card.querySelector(".progress-checkbox");
-        const statusLabel = card.querySelector(".progress-status-label");
-        
+        const progressLabel = card.querySelector(".progress-status-label");
+        const masteryCheckbox = card.querySelector(".mastery-checkbox");
+        const masteryLabel = card.querySelector(".mastery-status-label");
+
         checkbox.addEventListener("change", (e) => {
             if (e.target.checked) {
                 unlockedCars.add(car.id);
                 card.classList.add("unlocked-active");
-                statusLabel.textContent = "OBTENIDO";
+                progressLabel.textContent = "OBTENIDO";
             } else {
                 unlockedCars.delete(car.id);
                 card.classList.remove("unlocked-active");
-                statusLabel.textContent = "NO OBTENIDO";
+                progressLabel.textContent = "NO OBTENIDO";
+            }
+            saveProgreso();
+            updateProgressDashboard();
+        });
+
+        masteryCheckbox.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                masteryCompletedCars.add(car.id);
+                card.classList.add("mastery-complete");
+                masteryLabel.textContent = "MAESTRÍA COMPLETA";
+            } else {
+                masteryCompletedCars.delete(car.id);
+                card.classList.remove("mastery-complete");
+                masteryLabel.textContent = "MAESTRÍA PENDIENTE";
             }
             saveProgreso();
             updateProgressDashboard();
@@ -846,7 +998,9 @@ function translateRarity(rarity) {
         "Rare": "Raro",
         "Epic": "Épico",
         "Legendary": "Legendario",
-        "Forza Edition": "Forza Edition"
+        "Forza Edition": "Forza Edition",
+        "Tesoro": "Tesoro",
+        "Abandonado": "Abandonado"
     };
     return dict[rarity] || rarity;
 }
@@ -855,15 +1009,12 @@ function translateRarity(rarity) {
 function updateProgressDashboard() {
     const totalVehicles = DATABASE.vehicles.length;
     const totalUnlocked = unlockedCars.size;
+    const masteredCount = masteryCompletedCars.size;
 
-    // Calcular porcentajes
     const progressPercent = totalVehicles > 0 ? Math.round((totalUnlocked / totalVehicles) * 100) : 0;
 
-    // Calcular valores invertidos
     let creditsSpent = 0;
     let skillPointsSpent = 0;
-
-    // Calcular valores restantes
     let creditsRemaining = 0;
     let skillPointsRemaining = 0;
 
@@ -877,24 +1028,23 @@ function updateProgressDashboard() {
         }
     });
 
-    // Actualizar elementos en el DOM
     const uiPercent = document.getElementById("ui-progress-percent");
     const uiBar = document.getElementById("ui-progress-bar");
     const uiCount = document.getElementById("ui-unlocked-count");
-    
+    const uiMasteredCount = document.getElementById("ui-mastered-count");
+
     const uiCreditsSpent = document.getElementById("ui-credits-spent");
     const uiPointsSpent = document.getElementById("ui-points-spent");
-    
     const uiCreditsRemaining = document.getElementById("ui-credits-remaining");
     const uiPointsRemaining = document.getElementById("ui-points-remaining");
 
     if (uiPercent) uiPercent.textContent = `${progressPercent}%`;
     if (uiBar) uiBar.style.width = `${progressPercent}%`;
     if (uiCount) uiCount.textContent = `${totalUnlocked} / ${totalVehicles}`;
-    
+    if (uiMasteredCount) uiMasteredCount.textContent = `${masteredCount} / ${totalVehicles}`;
+
     if (uiCreditsSpent) uiCreditsSpent.textContent = `${creditsSpent.toLocaleString()} CR`;
     if (uiPointsSpent) uiPointsSpent.textContent = `${skillPointsSpent} SP`;
-    
     if (uiCreditsRemaining) uiCreditsRemaining.textContent = `${creditsRemaining.toLocaleString()} CR`;
     if (uiPointsRemaining) uiPointsRemaining.textContent = `${skillPointsRemaining} SP`;
 }

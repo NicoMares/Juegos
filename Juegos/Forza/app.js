@@ -467,7 +467,7 @@ const DATABASE = {
         },
 
                         {
-  id: "Sierra",
+  id: "GT2005",
             brand: "Ford",
             name: "GT ",
             year: 2005,
@@ -481,6 +481,23 @@ const DATABASE = {
 
 
         },
+
+             {
+  id: "Mustang_FE",
+            brand: "Ford",
+            name: "Mustang GT 2+2 Fastback ",
+            year: 1968,
+            class: "A",
+            rarity: "Forza Edition",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Ford/Mustang_FE.png"
+
+
+        },
+
 
         //Subaru
               {

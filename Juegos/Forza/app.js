@@ -13,6 +13,16 @@ const DATABASE = {
             logo: "Logos/Aston Martin.png",
       
         },
+  
+           "Bmw": {
+            name: "Bmw",
+        
+            logo: "Logos/BMW.svg",
+      
+        },
+
+// C
+   
 
 
         "Dodge": {
@@ -21,18 +31,43 @@ const DATABASE = {
             logo: "Logos/Dodge.png"
         },
 
+        "Ferrari": {
+            name: "Ferrari",
+           
+            logo: "Logos/Ferrari.png"
+        },
 
-        "Lamborghini": {
+         "Ford": {
+            name: "Ford",
+           
+            logo: "Logos/Ford.png"
+        },
+/// G
+
+          "Honda": {
+            name: "Honda",
+           
+            logo: "Logos/Honda.png"
+        },
+
+
+        // J
+
+        // K
+
+         "Lamborghini": {
             name: "Lamborghini",
             
             logo: "Logos/lamborghini.svg"
         },
 
-         "Lancia": {
+        "Lancia": {
             name: "Lancia",
             
             logo: "Logos/Lancia.png"
         },
+
+
         "Lotus": {
             name: "Lotus",
             
@@ -40,13 +75,35 @@ const DATABASE = {
         },
 
 
+
+        "Mazda": {
+            name: "Mazda",
+        
+            logo: "Logos/Mazda.png"
+        },
+
+   
+
         "Mercedes-AMG": {
             name: "Mercedes-AMG",
         
             logo: "Logos/mercedes-amg.svg"
         },
 
+           "Mitsubishi": {
+            name: "Mitsubishi",
         
+            logo: "Logos/Mitsubishi.png"
+        },
+
+
+         "Nissan": {
+            name: "Nissan",
+        
+            logo: "Logos/Nissan.png"
+        },
+
+// O
 
           "Pagani": {
             name: "Pagani",
@@ -59,43 +116,67 @@ const DATABASE = {
            
             logo: "Logos/Porsche.png"
         },
+
+        // R
       
+ "Subaru": {
+            name: "Subaru",
+           
+            logo: "Logos/Subaru.png"
+        },
+
+
           "Toyota": {
             name: "Toyota",
            
             logo: "Logos/Toyota.png"
         },
 
-          "Honda": {
-            name: "Honda",
-           
-            logo: "Logos/Honda.png"
-        },
+/// U
 
 
+/// V
+
+
+///W
+
+/// Z
+    
+
+        
+   
       
     },
     vehicles: [
       
         //ASTON MARTIN
         {
-          id: "M1",
-            brand: "BMW",
-            name: "M1 ",
-            year: 1981,
+          id: "Vulcan",
+            brand: "Aston Martin",
+            name: "Vulcan",
+            year: 2016,
             class: "S2",
             rarity: "Legendary",
+            credits: 2300000,
+            skillPoints: 0,
+            treePath: "EL Aston Martin Vulcan fue un Vehiculo Regalado por forza Gracias a haber jugado al Forza Horizon 4.",
+            isDlc: false,
+            silhouette: "Autos/Aston Martin/Vulcan.png"
+        },
+        
+          //BMW
+        {
+          id: "M1",
+            brand: "Bmw",
+            name: "M1 ",
+            year: 1981,
+            class: "B",
+            rarity: "Tesoro",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/BMW/M1.png"
-        },
-        
-        {
-           
-       
-            
         },
         // DODGE
         {
@@ -103,10 +184,10 @@ const DATABASE = {
             brand: "Dodge",
             name: "Viper GTS ",
             year: 1999,
-            class: "S2",
+            class: "A",
             rarity: "Forza Edition",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Dodge/Viper_FE.png",
@@ -116,10 +197,10 @@ const DATABASE = {
             brand: "Dodge",
             name: "Charger R/T",
             year: 1969,
-            class: "S2",
-            rarity: "Legendary",
+            class: "C",
+            rarity: "Tesoro",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Dodge/Charger_RT.png"
@@ -132,10 +213,10 @@ const DATABASE = {
             brand: "Lamborghini",
             name: "Essenza SCV",
             year: 2020,
-            class: "S2",
-            rarity: "Forza Edition",
-            credits: 0,
-            skillPoints: 19,
+            class: "R",
+            rarity: "Legendary",
+            credits: 1500000,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Lamborghini/Essenza.png"
@@ -146,10 +227,10 @@ const DATABASE = {
             brand: "Lancia",
             name: "Stratos HF Stradale",
             year: 1974,
-            class: "S2",
-            rarity: "Legendary",
+            class: "C",
+            rarity: "Tesoro",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Lancia/Stratos.png"
@@ -163,13 +244,60 @@ const DATABASE = {
             class: "S2",
             rarity: "Forza Edition",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Lotus/Evija.png"
         },
      
+        // Nissan
+        {
+            id: "PAO",
+            brand: "Nissan",
+            name: "PAO",
+            year: 1989,
+            class: "D",
+            rarity: "Abandonado",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Nissan/PAO.png"
+        },
+
+ {
+            id: "Figaro",
+            brand: "Nissan",
+            name: "Figaro",
+            year: 1991,
+            class: "D",
+            rarity: "Tesoro",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Nissan/Figaro.png"
+        },
+
+
+
         
+// Mazda
+        {
+            id: "RX7",
+            brand: "Mazda",
+            name: "RX-7 GSL - SE ",
+            year: 1985,
+            class: "D",
+            rarity: "Tesoro",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Mazda/RX7.png"
+        },
+
+
         // MERCEDES-AMG
         {
             id: "amg_one_2021",
@@ -178,13 +306,26 @@ const DATABASE = {
             year: 2021,
             class: "S2",
             rarity: "Legendary",
-            credits: 0,
-            skillPoints: 19,
-            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            credits: 2800000,
+            skillPoints: 0,
+            treePath: "EL Mercedes AMG One fue un Vehiculo Regalado por forza Gracias a haber jugado al Forza Horizon 5.",
             isDlc: false,
             silhouette: "Autos/Mercedes AMG/AMG ONE.png"
         },
-       
+        // Mitsubishi
+        {
+            id: "Lancer_3",
+            brand: "Mitsubishi",
+            name: "Lancer Evolution III GSR",
+            year: 1995,
+            class: "B",
+            rarity: "Tesoro",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Mitsubishi/Lancer_3.png"
+        },
            
        
         // PAGANI
@@ -193,10 +334,10 @@ const DATABASE = {
             brand: "Pagani",
             name: "Huarya R",
             year: 2021,
-            class: "S2",
+            class: "R",
             rarity: "Legendary",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Pagani/Huarya-R.png"
@@ -208,10 +349,10 @@ const DATABASE = {
             brand: "Porsche",
             name: "#3 917 LH",
             year: 1970,
-            class: "S2",
+            class: "R",
             rarity: "Forza Edition",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Porsche/917_FE.png"
@@ -223,9 +364,9 @@ const DATABASE = {
             name: "959 ",
             year: 1987,
             class: "A",
-            rarity: "Legendary",
+            rarity: "Tesoro",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Porsche/959.png"
@@ -240,14 +381,29 @@ const DATABASE = {
             brand: "Toyota",
             name: "Tacoma TRD Pro",
             year: 2019,
-            class: "S2",
+            class: "R",
             rarity: "Forza Edition",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
-            silhouette: "Autos/Toyota/Toyota_FE.png"
+            silhouette: "Autos/Toyota/Tacoma_FE.png"
         },
+
+          {
+             id: "2000GT",
+            brand: "Toyota",
+            name: "2000GT",
+            year: 2019,
+            class: "D",
+            rarity: "Abandonado",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Tiene 1 Super Ruletas Y 4 Normales WOW",
+            isDlc: false,
+            silhouette: "Autos/Toyota/2000GT.png"
+        },
+
 
         // Honda
         {
@@ -255,13 +411,90 @@ const DATABASE = {
             brand: "Honda",
             name: "NSX-R GT ",
             year: 2005,
-            class: "S2",
-            rarity: "Legendary",
+            class: "A",
+            rarity: "Abandonado",
             credits: 0,
-            skillPoints: 19,
+            skillPoints: 0,
             treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
             isDlc: false,
             silhouette: "Autos/Honda/NSX-R.png"
+
+
+        },
+/// Ferrari
+         {
+  id: "SF90",
+            brand: "Ferrari",
+            name: "SF90 Stradale ",
+            year: 2020,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 575000,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Ferrari/SF90.png"
+        },
+        {
+            id: "Spa",
+            brand: "Ferrari",
+            name: "# 24 Spa 330  ",
+            year: 1967,
+            class: "A",
+            rarity: "Legendary",
+            credits: 70000000,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Ferrari/Spa.png"
+        },
+
+
+
+/// Ford
+                 {
+  id: "Sierra",
+            brand: "Ford",
+            name: "Sierra Cosworth RS500 ",
+            year: 1987,
+            class: "C",
+            rarity: "Abandonado",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Ford/Sierra.png"
+        },
+
+                        {
+  id: "Sierra",
+            brand: "Ford",
+            name: "GT ",
+            year: 2005,
+            class: "A",
+            rarity: "Tesoro",
+            credits: 0,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Ford/GT2005.png"
+
+
+        },
+
+        //Subaru
+              {
+  id: "22BSTI",
+            brand: "Subaru",
+            name: "22B-STi ",
+            year: 1998,
+            class: "S2",
+            rarity: "Legendary",
+            credits: 86000,
+            skillPoints: 0,
+            treePath: "Cúspide superior derecha. Requiere ventajas técnicas de velocidad e inmunidad de colisión.",
+            isDlc: false,
+            silhouette: "Autos/Subaru/22B-STi.png"
 
 
         }
